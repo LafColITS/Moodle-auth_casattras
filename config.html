@@ -1,0 +1,204 @@
+<?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+
+// Set to defaults if undefined (CAS).
+if (!isset ($config->hostname)) {
+    $config->hostname = '';
+}
+if (!isset ($config->port)) {
+    $config->port = '';
+}
+if (!isset ($config->casversion)) {
+    $config->casversion = CAS_VERSION_2_0;
+}
+if (!isset ($config->baseuri)) {
+    $config->baseuri = '';
+}
+if (!isset ($config->language)) {
+    $config->language = '';
+}
+if (!isset ($config->proxycas)) {
+    $config->proxycas = '';
+}
+if (!isset ($config->logoutcas)) {
+    $config->logoutcas = '';
+}
+if (!isset ($config->multiauth)) {
+    $config->multiauth = '';
+}
+if (!isset ($config->certificatecheck)) {
+    $config->certificatecheck = '';
+}
+if (!isset ($config->certificatepath)) {
+    $config->certificatepath = '';
+}
+if (!isset($config->logoutreturnurl)) {
+    $config->logoutreturnurl = '';
+}
+
+$yesno = array( get_string('no'), get_string('yes') );
+
+?>
+<table cellspacing="0" cellpadding="5" border="0">
+<tr>
+    <td colspan="2">
+        <h4><?php print_string('auth_casattras_server_settings', 'auth_casattras') ?></h4>
+    </td>
+</tr>
+<tr valign="top" class="required">
+    <td align="right"><label for="hostname"><?php print_string('auth_casattras_hostname_key', 'auth_casattras') ?>: </label></td>
+    <td>
+        <input name="hostname" id="hostname" type="text" size="30" value="<?php echo $config->hostname ?>" />
+        <?php
+if (isset($err['hostname'])) {
+    echo $OUTPUT->error_text($err['hostname']);
+} ?>
+    </td>
+    <td>
+        <?php print_string('auth_casattras_hostname', 'auth_casattras') ?>
+    </td>
+</tr>
+<tr valign="top" class="required">
+    <td align="right">
+        <label for="baseuri"><?php print_string('auth_casattras_baseuri_key', 'auth_casattras') ?>: </label>
+    </td>
+    <td>
+        <input name="baseuri" id="baseuri" type="text" size="30" value="<?php echo $config->baseuri ?>" />
+        <?php
+if (isset($err['baseuri'])) {
+    echo $OUTPUT->error_text($err['baseuri']);
+} ?>
+    </td>
+    <td>
+        <?php print_string('auth_casattras_baseuri', 'auth_casattras') ?>
+    </td>
+</tr>
+<tr valign="top" class="required">
+    <td align="right">
+        <label for="port"><?php print_string('auth_casattras_port_key', 'auth_casattras') ?>: </label>
+    </td>
+    <td>
+        <input name="port" id="port" type="text" size="30" value="<?php echo $config->port ?>" />
+        <?php
+if (isset($err['port'])) {
+    echo $OUTPUT->error_text($err['port']);
+} ?>
+    </td>
+    <td>
+        <?php print_string('auth_casattras_port', 'auth_casattras') ?>
+    </td>
+</tr>
+<tr valign="top" class="required">
+    <td align="right">
+        <?php echo html_writer::label(get_string('auth_casattras_casversion', 'auth_casattras'), 'menucasversion'); ?>:
+    </td>
+    <td>
+        <?php
+$casversions = array();
+$casversions[CAS_VERSION_1_0] = 'CAS 1.0';
+$casversions[CAS_VERSION_2_0] = 'CAS 2.0';
+$casversions[SAML_VERSION_1_1] = 'SAML 1.1';
+echo html_writer::select($casversions, 'casversion', $config->casversion, false);
+if (isset($err['casversion'])) {
+    echo $OUTPUT->error_text($err['casversion']);
+}
+        ?>
+    </td>
+    <td>
+        <?php print_string('auth_casattras_version', 'auth_casattras') ?>
+    </td>
+</tr>
+<tr valign="top" class="required">
+    <td align="right">
+        <?php echo html_writer::label(get_string('auth_casattras_proxycas_key', 'auth_casattras'), 'menuproxycas'); ?>:
+    </td>
+    <td>
+        <?php echo html_writer::select($yesno, 'proxycas', $config->proxycas, false); ?>
+    </td>
+    <td>
+        <?php print_string('auth_casattras_proxycas', 'auth_casattras') ?>
+    </td>
+</tr>
+<tr valign="top" class="required">
+    <td align="right"><?php 
+    echo html_writer::label(get_string('auth_casattras_logoutcas_key', 'auth_casattras'), 'menulogoutcas');
+    ?>:</td>
+    <td>
+        <?php echo html_writer::select($yesno, 'logoutcas', $config->logoutcas, false); ?>
+    </td>
+    <td>
+        <?php print_string('auth_casattras_logoutcas', 'auth_casattras') ?>
+    </td>
+</tr>
+<tr valign="top" class="required">
+    <td align="right"><?php
+    echo html_writer::label(get_string('auth_casattras_multiauth_key', 'auth_casattras'), 'menumultiauth');
+    ?>:</td>
+    <td>
+        <?php echo html_writer::select($yesno, 'multiauth', $config->multiauth, false); ?>
+    </td>
+    <td>
+        <?php print_string('auth_casattras_multiauth', 'auth_casattras') ?>
+    </td>
+</tr>
+<tr valign="top"  class="required">
+    <td align="right"><?php
+    echo html_writer::label(get_string('auth_casattras_certificate_check_key', 'auth_casattras'), 'menucertificate_check');
+    ?>:</td>
+    <td>
+        <?php echo html_writer::select($yesno, 'certificatecheck', $config->certificatecheck, false); ?>
+    </td>
+    <td>
+        <?php print_string('auth_casattras_certificate_check', 'auth_casattras'); ?>
+    </td>
+</tr>
+<tr valign="top" class="required">
+    <td align="right"><label for="certificatepath"><?php
+    print_string('auth_casattras_certificate_path_key', 'auth_casattras');
+    ?>: </label></td>
+    <td>
+        <input name="certificatepath" id="certificatepath" type="text" size="30" value="<?php echo $config->certificatepath ?>" />
+        <?php
+if (isset($err['certificatepath'])) {
+    echo $OUTPUT->error_text($err['certificatepath']);
+} ?>
+    </td>
+    <td>
+        <?php print_string('auth_casattras_certificate_path', 'auth_casattras') ?>
+    </td>
+</tr>
+<tr valign="top" class="required">
+    <td align="right"><?php print_string('auth_casattras_logout_return_url_key', 'auth_casattras') ?>:</td>
+    <td>
+       <input name="logoutreturnurl" type="text" size="30" value="<?php echo $config->logoutreturnurl ?>" />
+        <?php
+if (isset($err['logoutreturnurl'])) {
+    echo $OUTPUT->error_text($err['logoutreturnurl']);
+} ?>
+    </td>
+    <td>
+        <?php print_string('auth_casattras_logout_return_url', 'auth_casattras') ?>
+    </td>
+</tr>
+
+<?php
+$help  = get_string('auth_casattras_extrafields', 'auth_casattras');
+
+print_auth_lock_options($this->authtype, $userfields, $help, true, true);
+?>
+
+</table>
