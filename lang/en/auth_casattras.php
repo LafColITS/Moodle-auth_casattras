@@ -52,3 +52,8 @@ $string['auth_casattras_logout_return_url'] = 'Provide the URL that CAS users sh
 
 // Config form - error strings.
 $string['auth_casattras_certificate_path_empty'] = 'If you turn on Server validation, you need to specify a certificate path';
+
+// Login form.
+$string['CASform'] = 'Authentication choice';
+$string['accessCAS'] = 'CAS users';
+$string['accessNOCAS'] = 'other users';
