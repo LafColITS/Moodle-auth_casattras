@@ -49,6 +49,44 @@ class auth_plugin_casattras extends auth_plugin_base {
         $this->roleauth = 'auth_casattras';
         $this->errorlogtag = '[AUTH CAS-ATTRAS] ';
         $this->config = get_config('auth/casattras');
+
+        // Verify that the CAS auth plugin is not enabled, disable this plugin (casattras) if so, because they will conflict.
+        if (is_enabled_auth('cas') && is_enabled_auth('casattras')) {
+            // This code is modeled on that in moodle/admin/auth.php.
+            global $CFG;
+            get_enabled_auth_plugins(true);
+            if (empty($CFG->auth)) {
+                $authsenabled = array();
+            } else {
+                $authsenabled = explode(',', $CFG->auth);
+            }
+            $key = array_search('casattras', $authsenabled);
+            if ($key !== false) {
+                unset($authsenabled[$key]);
+                set_config('auth', implode(',', $authsenabled));
+            }
+            if ('casattras' == $CFG->registerauth) {
+                set_config('registerauth', '');
+            }
+            session_gc(); // Remove stale sessions.
+
+            $returnurl = new moodle_url('/admin/settings.php', array('section' => 'manageauths'));
+            print_error('casattras_disabled_by_cas', 'auth_casattras', $returnurl, null,
+                get_string('casattras_disabled_by_cas', 'auth_casattras'));
+        }
+    }
+
+    /**
+     * Return the properly translated human-friendly title of this auth plugin
+     *
+     * @todo Document this function
+     */
+    public function get_title() {
+        $title = parent::get_title();
+        if (is_enabled_auth('cas')) {
+            $title .= ' - '.get_string('cas_conflict_warning', 'auth_casattras');
+        }
+        return $title;
     }
 
     /**
@@ -153,6 +191,10 @@ class auth_plugin_casattras extends auth_plugin_base {
         global $CFG;
         if (self::$casinitialized) {
             return;
+        }
+
+        if (class_exists('phpCAS')) {
+            throw new Exception(get_string('phpcas_already_included', 'auth_casattras'));
         }
 
         require_once($CFG->dirroot.'/auth/casattras/phpCAS/CAS.php');

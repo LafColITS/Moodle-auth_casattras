@@ -25,6 +25,9 @@
 
 $string['pluginname'] = 'CAS server (SSO) with user-attribute release';
 $string['auth_casattrasdescription'] = 'This method uses a CAS server (Central Authentication Service) to authenticate users in a Single Sign On environment (SSO). User attributes are returned in the CAS authentication response rather than from an LDAP server. This allows usage of CAS servers that are not backed by an LDAP server or are backed by multiple LDAP servers. If the given username and password are valid according to CAS, Moodle creates a new user entry in its database, taking user attributes from the CAS authentication response if configured.';
+$string['cas_conflict_warning'] = 'Not compatible with "CAS server (SSO)", disable that plugin first.';
+$string['casattras_disabled_by_cas'] = '"CAS server (SSO) with user-attribute release" was disabled because the "CAS server (SSO)" plugin is enable. These authentication plugins will conflict with each other and only one can be enabled at a time.';
+$string['phpcas_already_included'] = 'phpCAS is already defined by another authentication plugin, CAS with attributes can not be initialized.';
 
 // Config form - phpcas config strings.
 $string['auth_casattras_server_settings'] = 'CAS server configuration';
