@@ -351,4 +351,18 @@ class auth_plugin_casattras extends auth_plugin_base {
 
         return $moodleattras;
     }
+
+    /**
+     * Logout from the CAS
+     *
+     */
+    public function prelogout_hook() {
+        global $CFG;
+
+        if (!empty($this->config->logoutcas)) {
+            $backurl = $CFG->wwwroot;
+            $this->init_cas();
+            phpCAS::logoutWithURL($backurl);
+        }
+    }
 }
