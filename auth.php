@@ -212,14 +212,14 @@ class auth_plugin_casattras extends auth_plugin_base {
         // Make sure phpCAS doesn't try to start a new PHP session when connecting to the CAS server.
         if ($this->config->proxycas) {
             phpCAS::proxy(
-                $this->config->casversion,
+                constant($this->config->casversion),
                 $this->config->hostname,
                 (int) $this->config->port,
                 $this->config->baseuri,
                 false);
         } else {
             phpCAS::client(
-                $this->config->casversion,
+                constant($this->config->casversion),
                 $this->config->hostname,
                 (int) $this->config->port,
                 $this->config->baseuri,
