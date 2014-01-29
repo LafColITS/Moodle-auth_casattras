@@ -211,8 +211,12 @@ print_auth_lock_options($this->authtype, $userfields, $help, true, true);
     <td>
         <select name="convert_authtype" id="convert_authtype" >
             <option value=''><?php print_string('convert_authtype_none', 'auth_casattras') ?></option>
-            <option value='cas_to_casattras'><?php print_string('convert_authtype_cas_to_casattras', 'auth_casattras') ?></option>
-            <option value='casattras_to_cas'><?php print_string('convert_authtype_casattras_to_cas', 'auth_casattras') ?></option>
+            <option value='cas_to_casattras'>
+                <?php print_string('convert_authtype_cas_to_casattras', 'auth_casattras', $numusers) ?>
+            </option>
+            <option value='casattras_to_cas'>
+                <?php print_string('convert_authtype_casattras_to_cas', 'auth_casattras', $numusers) ?>
+            </option>
         </select>
     </td>
     <td>

@@ -109,7 +109,12 @@ class auth_plugin_casattras extends auth_plugin_base {
      * @param array $page An object containing all the data for this page.
      */
     public function config_form($config, $err, $userfields) {
-        global $CFG, $OUTPUT;
+        global $CFG, $OUTPUT, $DB;
+
+        $numusers = new stdClass;
+        $numusers->cas = $DB->count_records('user', array('auth' => 'cas'));
+        $numusers->casattras = $DB->count_records('user', array('auth' => 'casattras'));
+
         include($CFG->dirroot.'/auth/casattras/config.html');
     }
 
