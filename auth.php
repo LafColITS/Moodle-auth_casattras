@@ -180,6 +180,16 @@ class auth_plugin_casattras extends auth_plugin_base {
         set_config('certificatepath', $config->certificatepath, 'auth/casattras');
         set_config('logoutreturnurl', $config->logoutreturnurl, 'auth/casattras');
 
+        // Update user authentication types if requested.
+        if (!empty($config->convert_authtype)) {
+            global $DB;
+            if ($config->convert_authtype == 'cas_to_casattras') {
+                $DB->set_field('user', 'auth', 'casattras', array('auth' => 'cas'));
+            } else if ($config->convert_authtype == 'convert_authtype_casattras_to_cas') {
+                $DB->set_field('user', 'auth', 'cas', array('auth' => 'casattras'));
+            }
+        }
+
         return true;
     }
 

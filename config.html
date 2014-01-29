@@ -201,4 +201,23 @@ $help  = get_string('auth_casattras_extrafields', 'auth_casattras');
 print_auth_lock_options($this->authtype, $userfields, $help, true, true);
 ?>
 
+<tr>
+    <td colspan="2">
+        <h4><?php print_string('convert_user_auth_types', 'auth_casattras') ?></h4>
+    </td>
+</tr>
+<tr valign="top" class="required">
+    <td align="right"><label for="convert_authtype"><?php print_string('convert_authtype', 'auth_casattras') ?>: </label></td>
+    <td>
+        <select name="convert_authtype" id="convert_authtype" >
+            <option value=''><?php print_string('convert_authtype_none', 'auth_casattras') ?></option>
+            <option value='cas_to_casattras'><?php print_string('convert_authtype_cas_to_casattras', 'auth_casattras') ?></option>
+            <option value='casattras_to_cas'><?php print_string('convert_authtype_casattras_to_cas', 'auth_casattras') ?></option>
+        </select>
+    </td>
+    <td>
+        <?php print_string('about_auth_type_conversion', 'auth_casattras') ?>
+    </td>
+</tr>
+
 </table>
