@@ -52,6 +52,7 @@ $string['auth_casattras_certificate_path'] = 'Path of the CA chain file (PEM For
 $string['auth_casattras_certificate_path_empty'] = 'If you turn on Server validation, you need to specify a certificate path';
 $string['auth_casattras_logout_return_url_key'] = 'Alternative logout return URL';
 $string['auth_casattras_logout_return_url'] = 'Provide the URL that CAS users shall be redirected to after logging out.<br />If left empty, users will be redirected to the location that moodle will redirect users to';
+$string['auth_casattras_extrafields'] = 'These fields are optional.  You can choose to pre-fill some Moodle user fields with information from the CAS authentication response if supported by your CAS server. <p>If you leave these fields blank, then nothing beyond the user id added to the user\'s account and Moodle defaults will be used instead.</p><p>In either case, the user will be able to edit all of these fields after they log in.</p>';
 
 // Config form - error strings.
 $string['auth_casattras_certificate_path_empty'] = 'If you turn on Server validation, you need to specify a certificate path';

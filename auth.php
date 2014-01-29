@@ -282,6 +282,9 @@ class auth_plugin_casattras extends auth_plugin_base {
 
         // If already authenticated.
         if (phpCAS::checkAuthentication()) {
+            if (empty($frm)) {
+                $frm = new stdClass;
+            }
             $frm->username = phpCAS::getUser();
             $frm->password = 'passwdCas';
             return;
