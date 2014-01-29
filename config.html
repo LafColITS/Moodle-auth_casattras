@@ -109,9 +109,9 @@ if (isset($err['port'])) {
     <td>
         <?php
 $casversions = array();
-$casversions[CAS_VERSION_1_0] = 'CAS 1.0';
-$casversions[CAS_VERSION_2_0] = 'CAS 2.0';
-$casversions[SAML_VERSION_1_1] = 'SAML 1.1';
+$casversions['CAS_VERSION_1_0'] = 'CAS 1.0';
+$casversions['CAS_VERSION_2_0'] = 'CAS 2.0';
+$casversions['SAML_VERSION_1_1'] = 'SAML 1.1';
 echo html_writer::select($casversions, 'casversion', $config->casversion, false);
 if (isset($err['casversion'])) {
     echo $OUTPUT->error_text($err['casversion']);
