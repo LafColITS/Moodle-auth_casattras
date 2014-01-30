@@ -301,8 +301,9 @@ class auth_plugin_casattras extends auth_plugin_base {
                 global $CFG, $PAGE, $OUTPUT;
                 $site = get_site();
                 $PAGE->set_url('/login/index.php');
-                $PAGE->navbar->add(get_string('CASform', 'auth_casattras'));
-                $PAGE->set_title("$site->fullname: $CASform");
+                $casform = get_string('CASform', 'auth_cas');
+                $PAGE->navbar->add($casform);
+                $PAGE->set_title("$site->fullname: $casform");
                 $PAGE->set_heading($site->fullname);
                 echo $OUTPUT->header();
                 include($CFG->dirroot.'/auth/casattras/cas_form.html');
