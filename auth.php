@@ -253,8 +253,8 @@ class auth_plugin_casattras extends auth_plugin_base {
             }
         }
 
-        if ($this->config->certificate_check && $this->config->certificate_path) {
-            phpCAS::setCasServerCACert($this->config->certificate_path);
+        if ($this->config->certificatecheck && $this->config->certificatepath) {
+            phpCAS::setCasServerCACert($this->config->certificatepath);
         } else {
             // Don't try to validate the server SSL credentials.
             phpCAS::setNoCasServerValidation();
