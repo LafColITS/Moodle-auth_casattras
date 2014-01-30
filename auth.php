@@ -288,12 +288,15 @@ class auth_plugin_casattras extends auth_plugin_base {
         // Configure phpCAS.
         $this->init_cas();
 
-        if ($this->config->multiauth) {
-            $usecas = optional_param('authCASattras', '', PARAM_RAW);
-            if ($usecas == 'NOCAS') {
-                return;
-            }
+        // Bypass CAS authentication if the NOCAS pramameter is present.
+        // If multi-auth isn't enabled usersn't won't be presented with a link that includes this parameter,
+        // but it can be manually included in the URL to allow manual accounts to log without CAS.
+        $usecas = optional_param('authCASattras', '', PARAM_RAW);
+        if ($usecas == 'NOCAS') {
+            return;
+        }
 
+        if ($this->config->multiauth) {
             // Show authentication form for multi-authentication
             // test pgtIou parameter for proxy mode (https connection
             // in background from CAS server to the php server).
