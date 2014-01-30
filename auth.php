@@ -277,18 +277,16 @@ class auth_plugin_casattras extends auth_plugin_base {
             return;
         }
 
-        // Configure phpCAS.
-        $this->init_cas();
-
-        // If already authenticated.
-        if (phpCAS::checkAuthentication()) {
-            if (empty($frm)) {
-                $frm = new stdClass;
-            }
-            $frm->username = phpCAS::getUser();
-            $frm->password = 'passwdCas';
+        // Don't do CAS authentication if the username/password form was submitted.
+        // CAS redirects will always be GET requests, so any posts shouldn't be handled by CAS.
+        $username = optional_param('username', '', PARAM_RAW);
+        $ticket = optional_param('ticket', '', PARAM_RAW);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' || (!empty($username) && empty($ticket))) {
             return;
         }
+
+        // Configure phpCAS.
+        $this->init_cas();
 
         if ($this->config->multiauth) {
             $usecas = optional_param('authCASattras', '', PARAM_RAW);
@@ -311,6 +309,16 @@ class auth_plugin_casattras extends auth_plugin_base {
                 echo $OUTPUT->footer();
                 exit();
             }
+        }
+
+        // If already authenticated.
+        if (phpCAS::checkAuthentication()) {
+            if (empty($frm)) {
+                $frm = new stdClass;
+            }
+            $frm->username = phpCAS::getUser();
+            $frm->password = 'passwdCas';
+            return;
         }
 
         // Force CAS authentication (if needed).
