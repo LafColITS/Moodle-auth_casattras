@@ -29,18 +29,34 @@ Installation
 
 2.  Log into Moodle as a site-adminstrator. You should be prompted to run a database update to install the plugin.
 
+3.  If you are going to configure SSL certificate validation of the CAS server (to prevent man-in-the-middle attacks on the login
+    response) then save the certificate-authority certificate (CA-cert) to the filesystem where it is readable by Moodle and note
+    its path.
+
 Configuration
 -------------
-1. Log into Moodle as a site-administrator.
-2. If you don't already, make sure that you have a **manual** authentication-type admin account that you can log in with.
-3. Log in with the **manual** authentication-type admin account to ensure that you won't get locked out while changing around
+1.  Log into Moodle as a site-administrator.
+
+2.  If you don't already, make sure that you have a **manual** authentication-type admin account that you can log in with.
+
+3.  Log in with the **manual** authentication-type admin account to ensure that you won't get locked out while changing around
     authentication settings.
-4. In Moodle, go to *Site Administration* -> *Plugins* -> *Authentication* -> *Manage Authentication*
-5. Edit the settings for **CAS server (SSO) with user-attribute release** to fit your CAS server.
-6. (Optional) If you are migrating from using the built-in CAS module you can choose to convert users' authentiation types from
+
+4.  In Moodle, go to *Site Administration* -> *Plugins* -> *Authentication* -> *Manage Authentication*
+
+5.  Edit the settings for **CAS server (SSO) with user-attribute release** to fit your CAS server.
+
+6.  If configuring CAS server certificate validation, enter the CA-cert path for the "Certificate path" field.
+
+7.  Edit the "Data Mapping" fields to match the user-attributes returned by your CAS server.
+
+6.  (Optional) If you are migrating from using the built-in CAS module you can choose to convert users' authentiation types from
     the built-in CAS authentication type to **CAS server (SSO) with user-attribute release**. Not that this setting allows you to
     convert users' authentication types back to the built-in **CAS server (SSO)** authentication type if needed.
-7. Save the configuration.
-8. Disable the built-in **CAS server (SSO)** authentication type. This authentication plugin uses a newer version of phpCAS which
+
+7.  Save the configuration.
+
+8.  Disable the built-in **CAS server (SSO)** authentication type. This authentication plugin uses a newer version of phpCAS which
     would conflict with the built-in **CAS server (SSO)** authentication type, so both cannot be enabled at the same time.
-9. Enable the **CAS server (SSO) with user-attribute release** authentication type.
+
+9.  Enable the **CAS server (SSO) with user-attribute release** authentication type.
