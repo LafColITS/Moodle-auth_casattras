@@ -342,7 +342,7 @@ class auth_plugin_casattras extends auth_plugin_base {
      */
     public function user_login ($username, $password) {
         $this->init_cas();
-        return phpCAS::isAuthenticated() && (trim(textlib::strtolower(phpCAS::getUser())) == $username);
+        return phpCAS::isAuthenticated() && (trim(core_text::strtolower(phpCAS::getUser())) == $username);
     }
 
     /**
@@ -355,7 +355,7 @@ class auth_plugin_casattras extends auth_plugin_base {
      * @return mixed array with no magic quotes or false on error
      */
     public function get_userinfo($username) {
-        if (!phpCAS::isAuthenticated() || trim(textlib::strtolower(phpCAS::getUser())) != $username) {
+        if (!phpCAS::isAuthenticated() || trim(core_text::strtolower(phpCAS::getUser())) != $username) {
             return array();
         }
 
