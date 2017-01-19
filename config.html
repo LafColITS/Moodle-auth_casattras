@@ -23,7 +23,7 @@ if (!isset ($config->port)) {
     $config->port = '';
 }
 if (!isset ($config->casversion)) {
-    $config->casversion = CAS_VERSION_2_0;
+    $config->casversion = 'CAS_VERSION_2_0';
 }
 if (!isset ($config->baseuri)) {
     $config->baseuri = '';
@@ -134,7 +134,7 @@ if (isset($err['casversion'])) {
     </td>
 </tr>
 <tr valign="top" class="required">
-    <td align="right"><?php 
+    <td align="right"><?php
     echo html_writer::label(get_string('auth_casattras_logoutcas_key', 'auth_casattras'), 'menulogoutcas');
     ?>:</td>
     <td>
