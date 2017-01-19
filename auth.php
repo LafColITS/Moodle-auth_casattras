@@ -68,7 +68,7 @@ class auth_plugin_casattras extends auth_plugin_base {
             if ('casattras' == $CFG->registerauth) {
                 set_config('registerauth', '');
             }
-            session_gc(); // Remove stale sessions.
+            \core\session\manager::gc(); // Remove stale sessions.
 
             $returnurl = new moodle_url('/admin/settings.php', array('section' => 'manageauths'));
             print_error('casattras_disabled_by_cas', 'auth_casattras', $returnurl, null,
