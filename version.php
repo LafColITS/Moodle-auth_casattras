@@ -26,9 +26,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = '2015070900';        // The current plugin version (Date: YYYYMMDDXX).
-$plugin->release   = '1.0.0';
+$plugin->version   = '2017011900';        // The current plugin version (Date: YYYYMMDDXX).
+$plugin->release   = '1.0.1';
 $plugin->requires  = '2013111800';        // Requires this Moodle version.
 $plugin->component = 'auth_casattras';        // Full name of the plugin (used for diagnostics).
 $plugin->maturity = MATURITY_STABLE;
-
