@@ -380,9 +380,13 @@ class auth_plugin_casattras extends auth_plugin_base {
         global $CFG;
 
         if (!empty($this->config->logoutcas)) {
-            $backurl = $CFG->wwwroot;
+            //$backurl = $CFG->wwwroot;
             $this->init_cas();
-            phpCAS::logoutWithURL($backurl);
+            //phpCAS::logoutWithURL($backurl);
+
+            // logout($url) parameter is removed as of CAS 3.3.5.1, switching to logout()
+            // TODO: call phpCAS::logoutWithURL($backurl) or phpCAS::logout() based on CAS server version
+            phpCAS::logout();
         }
     }
 }
