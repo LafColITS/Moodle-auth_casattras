@@ -51,7 +51,7 @@ class auth_plugin_casattras extends auth_plugin_base {
         $this->authtype = 'casattras';
         $this->roleauth = 'auth_casattras';
         $this->errorlogtag = '[AUTH CAS-ATTRAS] ';
-        $this->config = get_config('auth/casattras');
+        $this->config = get_config('auth_casattras');
 
         // Verify that the CAS auth plugin is not enabled, disable this plugin (casattras) if so, because they will conflict.
         if (is_enabled_auth('cas') && is_enabled_auth('casattras')) {
@@ -101,106 +101,6 @@ class auth_plugin_casattras extends auth_plugin_base {
      */
     public function is_internal() {
         return false;
-    }
-
-    /**
-     * Prints a form for configuring this authentication plugin.
-     *
-     * This function is called from admin/auth.php, and outputs a full page with
-     * a form for configuring this plugin.
-     *
-     * @param object $page An object containing all the data for this page. Unused.
-     * @param object $err An object containing errors. Unused.
-     * @param array $userfields User fields. Unused.
-     */
-    public function config_form($config, $err, $userfields) {
-        global $CFG, $OUTPUT, $DB;
-
-        $numusers = new stdClass;
-        $numusers->cas = $DB->count_records('user', array('auth' => 'cas'));
-        $numusers->casattras = $DB->count_records('user', array('auth' => 'casattras'));
-
-        include($CFG->dirroot.'/auth/casattras/config.html');
-    }
-
-    /**
-     * A chance to validate form data, and last chance to
-     * do stuff before it is inserted in config_plugin
-     * @param object object with submitted configuration settings (without system magic quotes)
-     * @param array $err array of error messages
-     */
-    public function validate_form($form, &$err) {
-        $certificatepath = trim($form->certificatepath);
-        if ($form->certificatecheck && empty($certificatepath)) {
-            $err['certificatepath'] = get_string('auth_casattras_certificate_path_empty', 'auth_casattras');
-        }
-    }
-
-    /**
-     * Processes and stores configuration data for this authentication plugin.
-     *
-     * @param object object with submitted configuration settings (without system magic quotes)
-     */
-    public function process_config($config) {
-        // CAS settings.
-        if (!isset($config->hostname)) {
-            $config->hostname = '';
-        }
-        if (!isset($config->port)) {
-            $config->port = '';
-        }
-        if (!isset($config->casversion)) {
-            $config->casversion = '';
-        }
-        if (!isset($config->baseuri)) {
-            $config->baseuri = '';
-        }
-        if (!isset($config->language)) {
-            $config->language = '';
-        }
-        if (!isset($config->proxycas)) {
-            $config->proxycas = '';
-        }
-        if (!isset($config->logoutcas)) {
-            $config->logoutcas = '';
-        }
-        if (!isset($config->multiauth)) {
-            $config->multiauth = '';
-        }
-        if (!isset($config->certificatecheck)) {
-            $config->certificatecheck = '';
-        }
-        if (!isset($config->certificatepath)) {
-            $config->certificatepath = '';
-        }
-        if (!isset($config->logoutreturnurl)) {
-            $config->logoutreturnurl = '';
-        }
-
-        // Save CAS settings.
-        set_config('hostname', trim($config->hostname), 'auth/casattras');
-        set_config('port', trim($config->port), 'auth/casattras');
-        set_config('casversion', $config->casversion, 'auth/casattras');
-        set_config('baseuri', trim($config->baseuri), 'auth/casattras');
-        set_config('language', $config->language, 'auth/casattras');
-        set_config('proxycas', $config->proxycas, 'auth/casattras');
-        set_config('logoutcas', $config->logoutcas, 'auth/casattras');
-        set_config('multiauth', $config->multiauth, 'auth/casattras');
-        set_config('certificatecheck', $config->certificatecheck, 'auth/casattras');
-        set_config('certificatepath', $config->certificatepath, 'auth/casattras');
-        set_config('logoutreturnurl', $config->logoutreturnurl, 'auth/casattras');
-
-        // Update user authentication types if requested.
-        if (!empty($config->convert_authtype)) {
-            global $DB;
-            if ($config->convert_authtype == 'cas_to_casattras') {
-                $DB->set_field('user', 'auth', 'casattras', array('auth' => 'cas'));
-            } else if ($config->convert_authtype == 'casattras_to_cas') {
-                $DB->set_field('user', 'auth', 'cas', array('auth' => 'casattras'));
-            }
-        }
-
-        return true;
     }
 
     /**

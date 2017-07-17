@@ -15,19 +15,28 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details.
+ * CAS attributes authentication plugin upgrade code
  *
- * @package auth_casattras
- * @author Adam Franco
- * @copyright 2014 Middlebury College  {@link http://www.middlebury.edu}
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @package auth_casattras
+ * @package    auth_casattras
+ * @copyright  2019 Lafayette College ITS
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = '2019101100';      // The current plugin version (Date: YYYYMMDDXX).
-$plugin->release   = '1.0.2';
-$plugin->requires  = '2017051500';      // Requires this Moodle version.
-$plugin->component = 'auth_casattras';  // Full name of the plugin (used for diagnostics).
-$plugin->maturity  = MATURITY_STABLE;
+/**
+ * Function to upgrade auth_casattras.
+ * @param int $oldversion the version we are upgrading from
+ * @return bool result
+ */
+function xmldb_auth_casattras_upgrade($oldversion) {
+    global $CFG, $DB;
+
+    if ($oldversion < 2019101100) {
+        // Convert info in config plugins from auth/casattras to auth_casattras.
+        upgrade_fix_config_auth_plugin_names('casattras');
+        upgrade_fix_config_auth_plugin_defaults('casattras');
+        upgrade_plugin_savepoint(true, 2019101100, 'auth', 'casattras');
+    }
+    return true;
+}
