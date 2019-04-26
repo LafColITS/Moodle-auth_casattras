@@ -26,19 +26,22 @@
  */
 
 if (!defined('MOODLE_INTERNAL')) {
-    die('Direct access to this script is forbidden.');    //  It must be included from a Moodle page.
+    die('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
 }
 
 require_once($CFG->libdir.'/authlib.php');
 
 /**
  * CAS-Attras authentication plugin.
+ *
+ * @package auth_casattras
+ * @author Adam Franco
+ * @copyright 2014 Middlebury College  {@link http://www.middlebury.edu}
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class auth_plugin_casattras extends auth_plugin_base {
 
-    /**
-     * Flag to ensure that phpCAS only gets initialized once.
-     */
+    /** @var boolean Flag to ensure that phpCAS only gets initialized once. */
     protected static $casinitialized = false;
 
     /**
@@ -106,7 +109,9 @@ class auth_plugin_casattras extends auth_plugin_base {
      * This function is called from admin/auth.php, and outputs a full page with
      * a form for configuring this plugin.
      *
-     * @param array $page An object containing all the data for this page.
+     * @param object $page An object containing all the data for this page. Unused.
+     * @param object $err An object containing errors. Unused.
+     * @param array $userfields User fields. Unused.
      */
     public function config_form($config, $err, $userfields) {
         global $CFG, $OUTPUT, $DB;
@@ -264,9 +269,6 @@ class auth_plugin_casattras extends auth_plugin_base {
     /**
      * Hook for overriding behaviour of login page.
      * This method is called from login/index.php page for all enabled auth plugins.
-     *
-     * @global object
-     * @global object
      */
     public function loginpage_hook() {
         global $frm;  // Can be used to override submitted login form.
