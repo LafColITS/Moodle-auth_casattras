@@ -19,7 +19,7 @@ php:
  - 7.1
  - 7.2
 
- env:
+env:
   global:
    - IGNORE_PATHS=phpCAS
   matrix:
