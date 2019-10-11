@@ -55,6 +55,11 @@ before_install:
 install:
   - moodle-plugin-ci install
 
+before_script:
+  - cp moodle/auth/casattras/tests/fixtures/users.json /tmp/users.json
+  - npm install cas-server-mock
+  - node node_modules/cas-server-mock/server.js --port=3004 --database=/tmp/users.json &
+
 script:
   - moodle-plugin-ci phplint
   - moodle-plugin-ci phpcpd

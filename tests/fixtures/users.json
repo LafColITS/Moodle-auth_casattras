@@ -1,0 +1,18 @@
+[
+    {
+        "name": "teachert",
+        "attributes": {
+            "givenname": "Terry",
+            "surname": "Teacher",
+            "mail": "teacher1@example.com"
+        }
+    },
+    {
+        "name": "students",
+        "attributes": {
+            "givenname": "Sally",
+            "surname": "Student",
+            "mail": "student1@example.com"
+        }
+    }
+]
