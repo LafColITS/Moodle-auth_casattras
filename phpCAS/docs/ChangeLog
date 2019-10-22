@@ -1,3 +1,61 @@
+Changes in version 1.3.8
+
+Bug Fixes:
+   * Fix pear package [#297] (Phil Fenstermacher)
+   
+Improvement:
+   * Adding support for PROXY CALLBACK using POST parameters instead of GET [#312]
+
+Changes in version 1.3.7
+
+Bug Fixes:
+   * Fix pear package [#297] (Phil Fenstermacher)
+
+Improvement:
+   * add method to get list of supported protocols (#293) Julien Boulen
+   
+  
+Changes in version 1.3.6
+
+Security Fixes:
+   * Fix XSS in proxy mode [#271] (Joachim Fritschi)
+
+Bug Fixes:
+   * Fix bad condition [#252] (Brice Vercoustre)
+   * Hash ticket strings to generate valid-length session-ids [#224, #244, #248] (Adam Franco)
+   * Fix "phpCAS" class capitalization in code [#273, #277] (phy25)
+   
+Improvement:
+   * Remove fallback for __autoload [#247] (marinaglancy)
+   * More robust check for Windows OS in File.php [#275] (xamount)
+   * Fix continue statement within switch/case for php 7.3 compatibility [#278] (stonk7)
+
+Changes in version 1.3.5
+
+Security Fixes:
+   * Fix possible authentication bypass in validateCAS20 [#228] (Gregory Boddin)
+
+Bug Fixes:
+   * Fix file permissions (non-executable) [#177] (Remi Collet)
+   * Fixed translations Greek and Japanese [#192](ikari7789)
+   * Fix errors under phpdbg [#204] (MasonM)
+   * Fix logout replication error [#213] (Gregory Boddin)
+
+Improvement:
+   * Add more debug info to logout code [#95] (Joachim Fritschi)
+   * Allow longer ticket >32 chars for PGTStorage [#130] (Joachim Fritchi)
+   * Improved verification of supplied CA arguments [#172] (Joachim Fritschi)
+   * Change minimum supported php version to 5.4 in documentation (Joachim Fritschi)
+   * Add message to CAS_Authentication_Exception [#197] (Baldinof)
+   * Ingnore composer related files and directories [#201] (greg0ire)
+   * Add setter for cas client [#206] (greg0ire)
+   * Add callback for attribute parsing [#205] (Gregory Boddin)
+   * Added setter for base url [#208] (LeopardDennis)
+   * Fix documentation of code documentation [#216] (erozqba)
+   * Improved https detection by HTTP_X_FORWARDED_Protocol [#220] (Gregory Boddin)
+   * Add language support for simplified chinese [#227] (phy25)
+
+
 Changes in version 1.3.4
 Security Fixes:
 
