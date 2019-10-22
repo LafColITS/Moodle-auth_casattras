@@ -7,3 +7,4 @@
 - Dropped user authentication method migration support
 - Updated for GDPR compliance
 - Formal release on Moodle plugins repository
+- Updated phpCAS to 1.3.8
