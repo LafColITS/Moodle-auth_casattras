@@ -69,3 +69,5 @@ $string['about_auth_type_conversion'] = 'Choosing an option here will update the
 $string['CASform'] = 'Authentication choice';
 $string['accessCAS'] = 'CAS users';
 $string['accessNOCAS'] = 'other users';
+
+$string['privacy:metadata'] = 'The CAS attributes authentication plugin does not store any personal data.';
