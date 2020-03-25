@@ -52,6 +52,11 @@ $string['auth_casattras_certificate_path_empty'] = 'If you turn on Server valida
 $string['auth_casattras_logout_return_url_key'] = 'Alternative logout return URL';
 $string['auth_casattras_logout_return_url'] = 'Provide the URL that CAS users shall be redirected to after logging out.<br />If left empty, users will be redirected to the location that moodle will redirect users to';
 $string['auth_casattras_extrafields'] = 'These fields are optional.  You can choose to pre-fill some Moodle user fields with information from the CAS authentication response if supported by your CAS server. <p>If you leave these fields blank, then nothing beyond the user id added to the user\'s account and Moodle defaults will be used instead.</p><p>In either case, the user will be able to edit all of these fields after they log in.</p>';
+$string['auth_casattras_auth_name'] = 'Authentication method name';
+$string['auth_casattras_auth_name_description'] = 'Provide a name for the CAS authentication method that is familiar to your users.';
+$string['auth_casattras_auth_logo'] = 'Authentication method logo';
+$string['auth_casattras_auth_logo_description'] = 'Provide a logo for the CAS authentication method that is familiar to your users.';
+$string['auth_casattras_auth_service'] = 'CAS';
 
 // Config form - error strings.
 $string['auth_casattras_certificate_path_empty'] = 'If you turn on Server validation, you need to specify a certificate path';
