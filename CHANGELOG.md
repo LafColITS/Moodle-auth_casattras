@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Use core phpCAS module
+
 ## 3.5.0 (October 22, 2019)
 
 - Changed version numbering to match stable version
