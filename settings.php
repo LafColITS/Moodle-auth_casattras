@@ -30,6 +30,19 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_heading('auth_casattras/pluginname', '',
             new lang_string('auth_casattras_server_settings', 'auth_casattras')));
 
+    // Authentication method name.
+    $settings->add(new admin_setting_configtext('auth_casattras/auth_name',
+            new lang_string('auth_casattras_auth_name', 'auth_casattras'),
+            new lang_string('auth_casattras_auth_name_description', 'auth_casattras'),
+            new lang_string('auth_casattras_auth_service', 'auth_cas'),
+            PARAM_RAW_TRIMMED));
+
+    // Authentication method logo.
+    $opts = array('accepted_types' => array('.png', '.jpg', '.gif', '.webp', '.tiff', '.svg'));
+    $settings->add(new admin_setting_configstoredfile('auth_casattras/auth_logo',
+            new lang_string('auth_casattras_auth_logo', 'auth_casattras'),
+            new lang_string('auth_casattras_auth_logo_description', 'auth_casattras'), 'logo', 0, $opts));
+
     // Hostname.
     $settings->add(new admin_setting_configtext('auth_casattras/hostname',
             new lang_string('auth_casattras_hostname_key', 'auth_casattras'),

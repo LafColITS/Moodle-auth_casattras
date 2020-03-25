@@ -167,7 +167,7 @@ class auth_plugin_casattras extends auth_plugin_base {
      */
     public function loginpage_hook() {
         global $frm;  // Can be used to override submitted login form.
-        global $user; // Can be used to replace authenticate_user_login().
+        global $SESSION;
 
         // Return if CAS enabled and settings are not specified yet.
         if (empty($this->config->hostname)) {
@@ -178,39 +178,28 @@ class auth_plugin_casattras extends auth_plugin_base {
         // CAS redirects will always be GET requests, so any posts shouldn't be handled by CAS.
         $username = optional_param('username', '', PARAM_RAW);
         $ticket = optional_param('ticket', '', PARAM_RAW);
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' || (!empty($username) && empty($ticket))) {
-            return;
-        }
-
-        // Configure phpCAS.
-        $this->init_cas();
-
-        // Bypass CAS authentication if the NOCAS pramameter is present.
-        // If multi-auth isn't enabled usersn't won't be presented with a link that includes this parameter,
-        // but it can be manually included in the URL to allow manual accounts to log without CAS.
-        $usecas = optional_param('authCASattras', '', PARAM_RAW);
-        if ($usecas == 'NOCAS') {
+        if (!empty($username)) {
+            if (isset($SESSION->wantsurl) && (strstr($SESSION->wantsurl, 'ticket') ||
+                                              strstr($SESSION->wantsurl, 'NOCAS'))) {
+                unset($SESSION->wantsurl);
+            }
             return;
         }
 
         if ($this->config->multiauth) {
-            // Show authentication form for multi-authentication
-            // test pgtIou parameter for proxy mode (https connection
-            // in background from CAS server to the php server).
-            if ($usecas != 'CAS' && !isset($_GET['pgtIou'])) {
-                global $CFG, $PAGE, $OUTPUT;
-                $site = get_site();
-                $PAGE->set_url('/login/index.php');
-                $casform = get_string('CASform', 'auth_cas');
-                $PAGE->navbar->add($casform);
-                $PAGE->set_title("$site->fullname: $casform");
-                $PAGE->set_heading($site->fullname);
-                echo $OUTPUT->header();
-                include($CFG->dirroot.'/auth/casattras/cas_form.html');
-                echo $OUTPUT->footer();
-                exit();
+            // If there is an authentication error, stay on the default authentication page.
+            if (!empty($SESSION->loginerrormsg)) {
+                return;
+            }
+    
+            $usecas = optional_param('authCASattras', '', PARAM_RAW);
+            if ($usecas != 'CASattras') {
+                return;
             }
         }
+
+        // Configure phpCAS.
+        $this->init_cas();
 
         // If already authenticated.
         if (phpCAS::checkAuthentication()) {
@@ -281,5 +270,26 @@ class auth_plugin_casattras extends auth_plugin_base {
             $this->init_cas();
             phpCAS::logoutWithURL($backurl);
         }
+    }
+
+    /**
+     * Return a list of identity providers to display on the login page.
+     *
+     * @param string|moodle_url $wantsurl The requested URL.
+     * @return array List of arrays with keys url, iconurl and name.
+     */
+    public function loginpage_idp_list($wantsurl) {
+        global $CFG;
+        $config = get_config('auth_casattras');
+        $params = ["authCASattras" => "CASattras"];
+        $url = new moodle_url(get_login_url(), $params);
+        $iconurl = moodle_url::make_pluginfile_url(context_system::instance()->id,
+                                                   'auth_casattras',
+                                                   'logo',
+                                                   null,
+                                                   '/',
+                                                   $config->auth_logo);
+        $result[] = ['url' => $url, 'iconurl' => $iconurl, 'name' => $config->auth_name];
+        return $result;
     }
 }
