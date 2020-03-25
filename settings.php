@@ -34,7 +34,7 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configtext('auth_casattras/auth_name',
             new lang_string('auth_casattras_auth_name', 'auth_casattras'),
             new lang_string('auth_casattras_auth_name_description', 'auth_casattras'),
-            new lang_string('auth_casattras_auth_service', 'auth_cas'),
+            new lang_string('auth_casattras_auth_service', 'auth_casattras'),
             PARAM_RAW_TRIMMED));
 
     // Authentication method logo.
