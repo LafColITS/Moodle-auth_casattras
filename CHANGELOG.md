@@ -1,8 +1,10 @@
 # Changelog
 
-## Unreleased
+## 3.7.0 (March 26, 2020)
 
+- Rebuild multi-authentication support
 - Use core phpCAS module
+- Code cleanup
 
 ## 3.5.0 (October 22, 2019)
 

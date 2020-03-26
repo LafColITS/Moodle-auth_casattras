@@ -11,7 +11,7 @@ This authentication method makes use of the attributes returned by the phpCAS li
 
 Requirements
 ------------
-* Moodle 3.5 (build 2018051700 or later)
+* Moodle 3.7 (build 2019052000 or later)
 *  A CAS server that supports attribute-release via one of...
     1. The SAML 1.1 protocol
     2. The CAS 2.0 protocol with the serviceValidate JSP customized to include attributes
