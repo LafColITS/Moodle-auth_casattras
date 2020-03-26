@@ -191,7 +191,7 @@ class auth_plugin_casattras extends auth_plugin_base {
                 return;
             }
     
-            $usecas = optional_param('authCASattras', '', PARAM_RAW);
+            $usecas = optional_param('authCASattras', '', PARAM_ALPHA);
             if ($usecas != 'CASattras') {
                 return;
             }
