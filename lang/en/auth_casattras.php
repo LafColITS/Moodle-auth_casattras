@@ -23,7 +23,6 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['about_auth_type_conversion'] = 'Choosing an option here will update the authentication type for existing users. This is useful if you wish to migrate from using the built-in \'CAS server (SSO)\' authentication type that fetches attributes from LDAP to this \'CAS server (SSO) with user-attribute release\' authentication type. You can also use this option to switch your users back to the \'CAS server (SSO)\' authentication type. Note that this option only updates the authentication type for users and doesn\'t change any other user data.';
 $string['auth_casattras_auth_logo_description'] = 'Provide a logo for the CAS authentication method that is familiar to your users.';
 $string['auth_casattras_auth_logo'] = 'Authentication method logo';
 $string['auth_casattras_auth_name_description'] = 'Provide a name for the CAS authentication method that is familiar to your users.';
