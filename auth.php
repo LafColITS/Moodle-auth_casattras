@@ -175,7 +175,6 @@ class auth_plugin_casattras extends auth_plugin_base {
         }
 
         // Don't do CAS authentication if the username/password form was submitted.
-        // CAS redirects will always be GET requests, so any posts shouldn't be handled by CAS.
         $username = optional_param('username', '', PARAM_RAW);
         $ticket = optional_param('ticket', '', PARAM_RAW);
         if (!empty($username)) {
