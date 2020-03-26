@@ -21,8 +21,6 @@ services:
  - mysql
 
 env:
-  global:
-   - IGNORE_PATHS=phpCAS
   matrix:
    - DB=pgsql MOODLE_BRANCH=MOODLE_35_STABLE
    - DB=pgsql MOODLE_BRANCH=MOODLE_36_STABLE

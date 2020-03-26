@@ -30,6 +30,7 @@ if (!defined('MOODLE_INTERNAL')) {
 }
 
 require_once($CFG->libdir.'/authlib.php');
+require_once($CFG->dirroot.'/auth/cas/CAS/CAS.php');
 
 /**
  * CAS-Attras authentication plugin.
@@ -112,12 +113,6 @@ class auth_plugin_casattras extends auth_plugin_base {
         if (self::$casinitialized) {
             return;
         }
-
-        if (class_exists('phpCAS')) {
-            throw new Exception(get_string('phpcas_already_included', 'auth_casattras'));
-        }
-
-        require_once($CFG->dirroot.'/auth/casattras/phpCAS/CAS.php');
 
         // Make sure phpCAS doesn't try to start a new PHP session when connecting to the CAS server.
         if ($this->config->proxycas) {
