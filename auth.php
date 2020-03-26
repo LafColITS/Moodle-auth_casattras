@@ -190,7 +190,7 @@ class auth_plugin_casattras extends auth_plugin_base {
             if (!empty($SESSION->loginerrormsg)) {
                 return;
             }
-    
+
             $usecas = optional_param('authCASattras', '', PARAM_ALPHA);
             if ($usecas != 'CASattras') {
                 return;
