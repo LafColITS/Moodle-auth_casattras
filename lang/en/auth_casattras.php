@@ -69,9 +69,4 @@ $string['convert_authtype_cas_to_casattras'] = 'Convert {$a->cas} users from \'C
 $string['convert_authtype_casattras_to_cas'] = 'Convert {$a->casattras} users from \'CAS server (SSO) with user-attribute release\' to \'CAS server (SSO)\'';
 $string['about_auth_type_conversion'] = 'Choosing an option here will update the authentication type for existing users. This is useful if you wish to migrate from using the built-in \'CAS server (SSO)\' authentication type that fetches attributes from LDAP to this \'CAS server (SSO) with user-attribute release\' authentication type. You can also use this option to switch your users back to the \'CAS server (SSO)\' authentication type. Note that this option only updates the authentication type for users and doesn\'t change any other user data.';
 
-// Login form.
-$string['CASform'] = 'Authentication choice';
-$string['accessCAS'] = 'CAS users';
-$string['accessNOCAS'] = 'other users';
-
 $string['privacy:metadata'] = 'The CAS attributes authentication plugin does not store any personal data.';
