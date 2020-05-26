@@ -1,8 +1,8 @@
 language: php
 
 addons:
+  postgresql: "9.5"
   firefox: "47.0.1"
-  postgresql: "9.4"
   apt:
     packages:
       - openjdk-8-jre-headless
@@ -12,27 +12,22 @@ cache:
     - $HOME/.composer/cache
     - $HOME/.npm
 
-php:
- - 7.1
- - 7.2
- - 7.3
-
 services:
  - mysql
 
-env:
-  matrix:
-   - DB=pgsql MOODLE_BRANCH=MOODLE_37_STABLE
-   - DB=pgsql MOODLE_BRANCH=MOODLE_38_STABLE
-   - DB=pgsql MOODLE_BRANCH=master
-   - DB=mysqli MOODLE_BRANCH=MOODLE_37_STABLE
-   - DB=mysqli MOODLE_BRANCH=MOODLE_38_STABLE
-   - DB=mysqli MOODLE_BRANCH=master
+ matrix:
+  include:
+    - php: 7.1
+      env: DB=mysqli MOODLE_BRANCH=MOODLE_37_STABLE NODE_VERSION=14.2.0
+    - php: 7.3
+      env: DB=pgsql MOODLE_BRANCH=MOODLE_38_STABLE NODE_VERSION=14.2.0
+    - php: 7.3
+      env: DB=mysqli MOODLE_BRANCH=master NODE_VERSION=14.2.0
 
 before_install:
   - phpenv config-rm xdebug.ini
-  - nvm install 8.9
-  - nvm use 8.9
+  - nvm install $NODE_VERSION
+  - nvm use $NODE_VERSION
   - cd ../..
   - composer create-project -n --no-dev --prefer-dist blackboard-open-source/moodle-plugin-ci ci ^2
   - export PATH="$(cd ci/bin; pwd):$(cd ci/vendor/bin; pwd):$PATH"
