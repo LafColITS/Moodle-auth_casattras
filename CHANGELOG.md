@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.7.1 (June 9, 2020)
+
+- Fixed bug with login token (thanks @nkokkos)
+
 ## 3.7.0 (March 26, 2020)
 
 - Rebuild multi-authentication support
