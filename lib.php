@@ -58,7 +58,7 @@ function auth_casattras_pluginfile($course, $cm, $context, $filearea, $args, $fo
     // Retrieve the file from the Files API.
     $itemid = 0;
     $fs = get_file_storage();
-    $file = $fs->get_file($context->id, 'auth_cas', $filearea, $itemid, $filepath, $filename);
+    $file = $fs->get_file($context->id, 'auth_casattras', $filearea, $itemid, $filepath, $filename);
     if (!$file) {
         return false; // The file does not exist.
     }
