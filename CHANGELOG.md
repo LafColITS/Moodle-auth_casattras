@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.7.2 (July 10, 2020)
+
+- Fixed bug with logo when using multi-authentication (thanks @jogemu)
+
 ## 3.7.1 (June 9, 2020)
 
 - Fixed bug with login token (thanks @nkokkos)
