@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Change default branch to "main"
+- Update CI tool to version 3
+
 ## 3.7.2 (July 10, 2020)
 
 - Fixed bug with logo when using multi-authentication (thanks @jogemu)
