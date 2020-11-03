@@ -4,6 +4,7 @@
 
 - Change default branch to "main"
 - Update CI tool to version 3
+- Drop support for Moodle 3.6
 
 ## 3.7.2 (July 10, 2020)
 
