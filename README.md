@@ -1,7 +1,7 @@
 CAS server (SSO) with user-attribute release
 ============================================
 
-[![Build Status](https://travis-ci.org/LafColITS/Moodle-auth_casattras.svg?branch=master)](https://travis-ci.org/LafColITS/Moodle-auth_casattras)
+![Moodle Plugin CI](https://github.com/LafColITS/Moodle-auth_casattras/workflows/Moodle%20Plugin%20CI/badge.svg)
 
 This is an authentication plugin for Moodle that authenticates users via a Central Authentication Service (CAS) server and populates the Moodle user-account's attributes from user-attributes included in the CAS response.
 
