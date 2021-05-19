@@ -5,6 +5,7 @@
 - Change default branch to "main"
 - Update CI tool to version 3
 - Migrate CI builds to Github Actions
+- Drop support for 3.7-3.8
 
 ## 3.7.2 (July 10, 2020)
 
