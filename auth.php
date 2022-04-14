@@ -271,10 +271,7 @@ class auth_plugin_casattras extends auth_plugin_base {
         $moodleattras = array();
 
         foreach ($this->attributes() as $key => $field) {
-            $casfield = $this->config->{"field_map_$key"};
-            if (!empty($casfield) && !empty($casattras[$casfield])) {
-                $moodleattras[$key] = $casattras[$casfield];
-            }
+            $moodleattras[$key] = $casattras[$field];
         }
         return $moodleattras;
     }
