@@ -233,7 +233,28 @@ class auth_plugin_casattras extends auth_plugin_base {
     }
 
     /**
-     * Read user information from external database and returns it as array().
+     * Returns user attribute mappings between Moodle and the CAS server.
+     *
+     * @return array
+     */
+    protected function attributes() {
+        $moodleattributes = array();
+        $customfields = $this->get_custom_user_profile_fields();
+        if (!empty($customfields) && !empty($this->userfields)) {
+            $userfields = array_merge($this->userfields, $customfields);
+        } else {
+            $userfields = $this->userfields;
+        }
+        foreach ($userfields as $field) {
+            if (!empty($this->config->{"field_map_$field"})) {
+                $moodleattributes[$field] = $this->config->{"field_map_$field"};
+            }
+        }
+        return $moodleattributes;
+    }
+
+    /**
+     * Read user information from cas server and returns it as array().
      * Function should return all information available. If you are saving
      * this information to moodle user-table you should honour synchronisation flags
      *
@@ -249,13 +270,12 @@ class auth_plugin_casattras extends auth_plugin_base {
         $casattras = phpCAS::getAttributes();
         $moodleattras = array();
 
-        foreach ($this->userfields as $field) {
-            $casfield = $this->config->{"field_map_$field"};
+        foreach ($this->attributes() as $key => $field) {
+            $casfield = $this->config->{"field_map_$key"};
             if (!empty($casfield) && !empty($casattras[$casfield])) {
-                $moodleattras[$field] = $casattras[$casfield];
+                $moodleattras[$key] = $casattras[$casfield];
             }
         }
-
         return $moodleattras;
     }
 
