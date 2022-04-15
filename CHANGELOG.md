@@ -1,7 +1,8 @@
 # Changelog
 
-## Unreleased
+## 3.9.0 (April 15, 2022)
 
+- [FEATURE] Add support for custom profile field mapping
 - Change default branch to "main"
 - Update CI tool to version 3
 - Migrate CI builds to Github Actions

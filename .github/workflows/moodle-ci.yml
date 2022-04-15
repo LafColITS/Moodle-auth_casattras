@@ -37,14 +37,12 @@ jobs:
       fail-fast: false
       matrix:
         php: ['7.3', '7.4']
-        moodle-branch: ['MOODLE_39_STABLE', 'MOODLE_310_STABLE', 'MOODLE_311_STABLE', 'master']
+        moodle-branch: ['MOODLE_39_STABLE', 'MOODLE_310_STABLE', 'MOODLE_311_STABLE']
         database: [pgsql, mariadb]
 
         include:
           - {moodle-branch: 'MOODLE_311_STABLE', php: '8.0', operating-system: 'ubuntu-18.04', database: 'mariadb'}
           - {moodle-branch: 'MOODLE_311_STABLE', php: '8.0', operating-system: 'ubuntu-18.04', database: 'pgsql'}
-          - {moodle-branch: 'master', php: '8.0', operating-system: 'ubuntu-18.04', database: 'mariadb'}
-          - {moodle-branch: 'master', php: '8.0', operating-system: 'ubuntu-18.04', database: 'pgsql'}
 
     steps:
       - name: Check out repository code
