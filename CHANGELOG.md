@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.1.0 (December 6, 2022)
+
+- [BUGFIX] Update for compatibility with phpCAS 1.6.0
+
 ## 4.0.0 (April 15, 2022)
 
 - [FEATURE] Add support for custom profile field mapping
