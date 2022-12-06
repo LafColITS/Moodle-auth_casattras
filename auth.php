@@ -115,6 +115,14 @@ class auth_plugin_casattras extends auth_plugin_base {
             return;
         }
 
+        // See MDL-75479
+        // Form the base URL of the server with just the protocol and hostname.
+        $serverurl = new moodle_url("/");
+        $servicebaseurl = $serverurl->get_scheme() ? $serverurl->get_scheme() . "://" : '';
+        $servicebaseurl .= $serverurl->get_host();
+        // Add the port if set.
+        $servicebaseurl .= $serverurl->get_port() ? ':' . $serverurl->get_port() : '';
+
         // Make sure phpCAS doesn't try to start a new PHP session when connecting to the CAS server.
         if ($this->config->proxycas) {
             phpCAS::proxy(
@@ -122,6 +130,7 @@ class auth_plugin_casattras extends auth_plugin_base {
                 $this->config->hostname,
                 (int) $this->config->port,
                 $this->config->baseuri,
+                $servicebaseurl,
                 false);
         } else {
             phpCAS::client(
@@ -129,6 +138,7 @@ class auth_plugin_casattras extends auth_plugin_base {
                 $this->config->hostname,
                 (int) $this->config->port,
                 $this->config->baseuri,
+                $servicebaseurl,
                 false);
         }
         self::$casinitialized = true;

@@ -32,5 +32,5 @@ $plugin->requires  = 2022041200.00;      // Requires this Moodle version.
 $plugin->component = 'auth_casattras';  // Full name of the plugin (used for diagnostics).
 $plugin->maturity  = MATURITY_STABLE;
 $plugin->dependencies = array(
-    'auth_cas' => ANY_VERSION
+    'auth_cas' => 2022112800,
 );
