@@ -216,7 +216,7 @@ class auth_plugin_casattras extends auth_plugin_base {
             if (empty($frm)) {
                 $frm = new stdClass;
             }
-            $frm->username   = phpCAS::getUser();
+            $frm->username = phpCAS::getUser();
             $frm->password = 'passwdCas';
             $frm->logintoken = \core\session\manager::get_login_token();
             return;
