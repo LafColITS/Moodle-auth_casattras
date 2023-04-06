@@ -62,6 +62,7 @@ if ($ADMIN->fulltree) {
     $casversions = array();
     $casversions['CAS_VERSION_1_0'] = 'CAS 1.0';
     $casversions['CAS_VERSION_2_0'] = 'CAS 2.0';
+    $casversions['CAS_VERSION_3_0'] = 'CAS 3.0';
     $casversions['SAML_VERSION_1_1'] = 'SAML 1.1';
     $settings->add(new admin_setting_configselect('auth_casattras/casversion',
             new lang_string('auth_casattras_casversion', 'auth_casattras'),

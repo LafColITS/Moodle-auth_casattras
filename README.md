@@ -15,7 +15,7 @@ Requirements
 *  A CAS server that supports attribute-release via one of...
     1. The SAML 1.1 protocol
     2. The CAS 2.0 protocol with the serviceValidate JSP customized to include attributes
-    3. [coming soon] The CAS 3.0 protocol
+    3. The CAS 3.0 protocol
 
 Installation
 ------------
