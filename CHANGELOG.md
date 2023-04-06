@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.1.1 (April 6, 2023)
+
+- Add support for CAS 3.0 protocol
+
 ## 4.1.0 (December 6, 2022)
 
 - [BUGFIX] Update for compatibility with phpCAS 1.6.0
