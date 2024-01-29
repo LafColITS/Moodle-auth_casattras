@@ -279,10 +279,16 @@ class auth_plugin_casattras extends auth_plugin_base {
 
         $casattras = phpCAS::getAttributes();
         $moodleattras = array();
-
         foreach ($this->attributes() as $key => $field) {
-            $moodleattras[$key] = $casattras[$field];
+	     if (isset($casattras[$field])) {
+             	  $moodleattras[$key] = $casattras[$field];
+	     } else if (isset($casattras['userAttributes'])) {
+                  $moodleattras[$key] = $casattras['userAttributes'][$field];
+	     } else {
+	          error_log("casattras: missing atribute '".$field."'");
+	     }
         }
+
         return $moodleattras;
     }
 
