@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Remove unused property (thanks @Ducret)
+
 ## 4.1.1 (April 6, 2023)
 
 - Add support for CAS 3.0 protocol

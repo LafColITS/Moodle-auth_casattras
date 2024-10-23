@@ -51,7 +51,6 @@ class auth_plugin_casattras extends auth_plugin_base {
      */
     public function __construct() {
         $this->authtype = 'casattras';
-        $this->roleauth = 'auth_casattras';
         $this->errorlogtag = '[AUTH CAS-ATTRAS] ';
         $this->config = get_config('auth_casattras');
 
