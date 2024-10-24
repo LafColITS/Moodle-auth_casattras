@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 4.1.2 (October 24, 2024)
 
 - Remove unused property (thanks @Ducret)
 
