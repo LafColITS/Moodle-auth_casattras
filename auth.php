@@ -303,6 +303,22 @@ class auth_plugin_casattras extends auth_plugin_base {
     }
 
     /**
+     * Hook for logout page
+     */
+    function logoutpage_hook() {
+        global $USER, $redirect;
+
+        // Only do this if the user is actually logged in via CAS
+        if ($USER->auth === $this->authtype) {
+            // Check if there is an alternative logout return url defined
+            if (isset($this->config->logoutreturnurl) && !empty($this->config->logoutreturnurl)) {
+                // Set redirect to alternative return url
+                $redirect = $this->config->logoutreturnurl;
+            }
+        }
+    }
+
+    /**
      * Post logout hook.
      *
      * Note: this method replace the prelogout_hook method to avoid redirect to CAS logout
