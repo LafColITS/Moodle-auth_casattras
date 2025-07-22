@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Ship phpCAS 1.6.1 locally
+
 ## 4.1.2 (October 24, 2024)
 
 - Remove unused property (thanks @Ducret)
