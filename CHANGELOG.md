@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 5.0.1 (July 22, 2025)
 
 - Ship phpCAS 1.6.1 locally
 - Code cleanup
