@@ -24,8 +24,6 @@
 
 namespace auth_casattras\privacy;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Privacy implementation for auth_casattras.
  *
@@ -43,7 +41,7 @@ class provider implements
      *
      * @return  string
      */
-    public static function get_reason() : string {
+    public static function get_reason(): string {
         return 'privacy:metadata';
     }
 }

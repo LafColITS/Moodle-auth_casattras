@@ -38,7 +38,7 @@ if ($ADMIN->fulltree) {
             PARAM_RAW_TRIMMED));
 
     // Authentication method logo.
-    $opts = array('accepted_types' => array('.png', '.jpg', '.gif', '.webp', '.tiff', '.svg'));
+    $opts = ['accepted_types' => ['.png', '.jpg', '.gif', '.webp', '.tiff', '.svg']];
     $settings->add(new admin_setting_configstoredfile('auth_casattras/auth_logo',
             new lang_string('auth_casattras_auth_logo', 'auth_casattras'),
             new lang_string('auth_casattras_auth_logo_description', 'auth_casattras'), 'logo', 0, $opts));
@@ -59,7 +59,7 @@ if ($ADMIN->fulltree) {
             new lang_string('auth_casattras_port', 'auth_casattras'), '', PARAM_INT));
 
     // CAS Version.
-    $casversions = array();
+    $casversions = [];
     $casversions['CAS_VERSION_1_0'] = 'CAS 1.0';
     $casversions['CAS_VERSION_2_0'] = 'CAS 2.0';
     $casversions['CAS_VERSION_3_0'] = 'CAS 3.0';
@@ -69,10 +69,10 @@ if ($ADMIN->fulltree) {
             new lang_string('auth_casattras_version', 'auth_casattras'), 'CAS_VERSION_2_0', $casversions));
 
     // Proxy.
-    $yesno = array(
+    $yesno = [
         new lang_string('no'),
         new lang_string('yes'),
-    );
+    ];
 
     $settings->add(new admin_setting_configselect('auth_casattras/proxycas',
             new lang_string('auth_casattras_proxycas_key', 'auth_casattras'),
