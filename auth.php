@@ -25,9 +25,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-if (!defined('MOODLE_INTERNAL')) {
-    die('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
-}
+defined('MOODLE_INTERNAL') || die;
 
 require_once($CFG->libdir.'/authlib.php');
 require_once('CAS/vendor/autoload.php');
@@ -43,7 +41,7 @@ require_once('CAS/vendor/apereo/phpcas/source/CAS.php');
  */
 class auth_plugin_casattras extends auth_plugin_base {
 
-    /** @var boolean Flag to ensure that phpCAS only gets initialized once. */
+    /** @var bool Flag to ensure that phpCAS only gets initialized once. */
     protected static $casinitialized = false;
 
     /**
@@ -60,7 +58,7 @@ class auth_plugin_casattras extends auth_plugin_base {
             global $CFG;
             get_enabled_auth_plugins(true);
             if (empty($CFG->auth)) {
-                $authsenabled = array();
+                $authsenabled = [];
             } else {
                 $authsenabled = explode(',', $CFG->auth);
             }
@@ -74,7 +72,7 @@ class auth_plugin_casattras extends auth_plugin_base {
             }
             \core\session\manager::gc(); // Remove stale sessions.
 
-            $returnurl = new moodle_url('/admin/settings.php', array('section' => 'manageauths'));
+            $returnurl = new moodle_url('/admin/settings.php', ['section' => 'manageauths']);
             print_error('casattras_disabled_by_cas', 'auth_casattras', $returnurl, null,
                 get_string('casattras_disabled_by_cas', 'auth_casattras'));
         }
@@ -82,8 +80,6 @@ class auth_plugin_casattras extends auth_plugin_base {
 
     /**
      * Return the properly translated human-friendly title of this auth plugin
-     *
-     * @todo Document this function
      */
     public function get_title() {
         $title = parent::get_title();
@@ -154,7 +150,7 @@ class auth_plugin_casattras extends auth_plugin_base {
                     phpCAS::setExtraCurlOption(CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5);
                 }
             }
-            if (!empty($CFG->proxyuser) and !empty($CFG->proxypassword)) {
+            if (!empty($CFG->proxyuser) && !empty($CFG->proxypassword)) {
                 phpCAS::setExtraCurlOption(CURLOPT_PROXYUSERPWD, $CFG->proxyuser.':'.$CFG->proxypassword);
                 if (defined('CURLOPT_PROXYAUTH')) {
                     // Any proxy authentication if PHP 5.1.
@@ -236,7 +232,7 @@ class auth_plugin_casattras extends auth_plugin_base {
      * @param string $password The password (with system magic quotes)
      * @return bool Authentication success or failure.
      */
-    public function user_login ($username, $password) {
+    public function user_login($username, $password) {
         $this->init_cas();
         return phpCAS::isAuthenticated() && (trim(core_text::strtolower(phpCAS::getUser())) == $username);
     }
@@ -247,7 +243,7 @@ class auth_plugin_casattras extends auth_plugin_base {
      * @return array
      */
     protected function attributes() {
-        $moodleattributes = array();
+        $moodleattributes = [];
         $customfields = $this->get_custom_user_profile_fields();
         if (!empty($customfields) && !empty($this->userfields)) {
             $userfields = array_merge($this->userfields, $customfields);
@@ -273,11 +269,11 @@ class auth_plugin_casattras extends auth_plugin_base {
      */
     public function get_userinfo($username) {
         if (!phpCAS::isAuthenticated() || trim(core_text::strtolower(phpCAS::getUser())) != $username) {
-            return array();
+            return [];
         }
 
         $casattras = phpCAS::getAttributes();
-        $moodleattras = array();
+        $moodleattras = [];
 
         foreach ($this->attributes() as $key => $field) {
             $moodleattras[$key] = $casattras[$field];
@@ -311,11 +307,12 @@ class auth_plugin_casattras extends auth_plugin_base {
         $params = ["authCASattras" => "CASattras"];
         $url = new moodle_url(get_login_url(), $params);
         $iconurl = moodle_url::make_pluginfile_url(context_system::instance()->id,
-                                                   'auth_casattras',
-                                                   'logo',
-                                                   null,
-                                                   '/',
-                                                   $config->auth_logo);
+            'auth_casattras',
+            'logo',
+            null,
+            '/',
+            $config->auth_logo
+        );
         $result[] = ['url' => $url, 'iconurl' => $iconurl, 'name' => $config->auth_name];
         return $result;
     }

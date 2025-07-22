@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Ship phpCAS 1.6.1 locally
+- Code cleanup
 
 ## 4.1.2 (October 24, 2024)
 
