@@ -21,7 +21,6 @@
  * @author Adam Franco
  * @copyright 2014 Middlebury College  {@link http://www.middlebury.edu}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @package auth_casattras
  */
 
 defined('MOODLE_INTERNAL') || die();
