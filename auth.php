@@ -280,7 +280,14 @@ class auth_plugin_casattras extends auth_plugin_base {
         $moodleattras = array();
 
         foreach ($this->attributes() as $key => $field) {
-            $moodleattras[$key] = $casattras[$field];
+            $attributes = $casattras[$field];
+            // Split attributes if it is an array.
+            if (is_array($attributes)) {
+                $moodleattras[$key] = implode(';', $attributes);
+            } else {
+                $moodleattras[$key] = $attributes;
+            }
+
         }
         return $moodleattras;
     }
