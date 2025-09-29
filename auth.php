@@ -276,7 +276,14 @@ class auth_plugin_casattras extends auth_plugin_base {
         $moodleattras = [];
 
         foreach ($this->attributes() as $key => $field) {
-            $moodleattras[$key] = $casattras[$field];
+            $attributes = $casattras[$field];
+            // Split attributes if it is an array.
+            if (is_array($attributes)) {
+                $moodleattras[$key] = implode(';', $attributes);
+            } else {
+                $moodleattras[$key] = $attributes;
+            }
+
         }
         return $moodleattras;
     }
@@ -286,12 +293,49 @@ class auth_plugin_casattras extends auth_plugin_base {
      *
      */
     public function prelogout_hook() {
-        global $CFG;
+        global $USER, $redirect;
 
-        if (!empty($this->config->logoutcas)) {
-            $backurl = $CFG->wwwroot;
+        // Only do this if the user is actually logged in via CAS
+        if ($USER->auth === $this->authtype) {
+            // Check if there is an alternative logout return url defined
+            if (isset($this->config->logoutreturnurl) && !empty($this->config->logoutreturnurl)) {
+                // Set redirect to alternative return url
+                $redirect = $this->config->logoutreturnurl;
+            }
+        }
+    }
+
+    /**
+     * Hook for logout page
+     */
+    function logoutpage_hook() {
+        global $USER, $redirect;
+
+        // Only do this if the user is actually logged in via CAS
+        if ($USER->auth === $this->authtype) {
+            // Check if there is an alternative logout return url defined
+            if (isset($this->config->logoutreturnurl) && !empty($this->config->logoutreturnurl)) {
+                // Set redirect to alternative return url
+                $redirect = $this->config->logoutreturnurl;
+            }
+        }
+    }
+
+    /**
+     * Post logout hook.
+     *
+     * Note: this method replace the prelogout_hook method to avoid redirect to CAS logout
+     * before the event userlogout being triggered.
+     *
+     * @param stdClass $user clone of USER object object before the user session was terminated
+     */
+    public function postlogout_hook($user) {
+        global $CFG;
+        // Only redirect to CAS logout if the user is logged as a CAS user.
+        if (!empty($this->config->logoutcas) && $user->auth == $this->authtype) {
+            $backurl = !empty($this->config->logoutreturnurl) ? $this->config->logoutreturnurl : $CFG->wwwroot;
             $this->init_cas();
-            phpCAS::logoutWithURL($backurl);
+            phpCAS::logoutWithRedirectService($backurl);
         }
     }
 
