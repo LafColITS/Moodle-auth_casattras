@@ -27,7 +27,7 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-require_once($CFG->libdir.'/authlib.php');
+require_once($CFG->libdir . '/authlib.php');
 require_once('CAS/vendor/autoload.php');
 require_once('CAS/vendor/apereo/phpcas/source/CAS.php');
 
@@ -40,7 +40,6 @@ require_once('CAS/vendor/apereo/phpcas/source/CAS.php');
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class auth_plugin_casattras extends auth_plugin_base {
-
     /** @var bool Flag to ensure that phpCAS only gets initialized once. */
     protected static $casinitialized = false;
 
@@ -73,8 +72,13 @@ class auth_plugin_casattras extends auth_plugin_base {
             \core\session\manager::gc(); // Remove stale sessions.
 
             $returnurl = new moodle_url('/admin/settings.php', ['section' => 'manageauths']);
-            print_error('casattras_disabled_by_cas', 'auth_casattras', $returnurl, null,
-                get_string('casattras_disabled_by_cas', 'auth_casattras'));
+            print_error(
+                'casattras_disabled_by_cas',
+                'auth_casattras',
+                $returnurl,
+                null,
+                get_string('casattras_disabled_by_cas', 'auth_casattras')
+            );
         }
     }
 
@@ -84,7 +88,7 @@ class auth_plugin_casattras extends auth_plugin_base {
     public function get_title() {
         $title = parent::get_title();
         if (is_enabled_auth('cas')) {
-            $title .= ' - '.get_string('cas_conflict_warning', 'auth_casattras');
+            $title .= ' - ' . get_string('cas_conflict_warning', 'auth_casattras');
         }
         return $title;
     }
@@ -126,7 +130,8 @@ class auth_plugin_casattras extends auth_plugin_base {
                 (int) $this->config->port,
                 $this->config->baseuri,
                 $servicebaseurl,
-                false);
+                false
+            );
         } else {
             phpCAS::client(
                 constant($this->config->casversion),
@@ -134,7 +139,8 @@ class auth_plugin_casattras extends auth_plugin_base {
                 (int) $this->config->port,
                 $this->config->baseuri,
                 $servicebaseurl,
-                false);
+                false
+            );
         }
         self::$casinitialized = true;
 
@@ -151,7 +157,7 @@ class auth_plugin_casattras extends auth_plugin_base {
                 }
             }
             if (!empty($CFG->proxyuser) && !empty($CFG->proxypassword)) {
-                phpCAS::setExtraCurlOption(CURLOPT_PROXYUSERPWD, $CFG->proxyuser.':'.$CFG->proxypassword);
+                phpCAS::setExtraCurlOption(CURLOPT_PROXYUSERPWD, $CFG->proxyuser . ':' . $CFG->proxypassword);
                 if (defined('CURLOPT_PROXYAUTH')) {
                     // Any proxy authentication if PHP 5.1.
                     phpCAS::setExtraCurlOption(CURLOPT_PROXYAUTH, CURLAUTH_BASIC | CURLAUTH_NTLM);
@@ -184,8 +190,10 @@ class auth_plugin_casattras extends auth_plugin_base {
         $username = optional_param('username', '', PARAM_RAW);
         $ticket = optional_param('ticket', '', PARAM_RAW);
         if (!empty($username)) {
-            if (isset($SESSION->wantsurl) && (strstr($SESSION->wantsurl, 'ticket') ||
-                                              strstr($SESSION->wantsurl, 'NOCAS'))) {
+            if (
+                isset($SESSION->wantsurl) && (strstr($SESSION->wantsurl, 'ticket') ||
+                                              strstr($SESSION->wantsurl, 'NOCAS'))
+            ) {
                 unset($SESSION->wantsurl);
             }
             return;
@@ -209,7 +217,7 @@ class auth_plugin_casattras extends auth_plugin_base {
         // If already authenticated.
         if (phpCAS::checkAuthentication()) {
             if (empty($frm)) {
-                $frm = new stdClass;
+                $frm = new stdClass();
             }
             $frm->username = phpCAS::getUser();
             $frm->password = 'passwdCas';
@@ -306,7 +314,8 @@ class auth_plugin_casattras extends auth_plugin_base {
         $config = get_config('auth_casattras');
         $params = ["authCASattras" => "CASattras"];
         $url = new moodle_url(get_login_url(), $params);
-        $iconurl = moodle_url::make_pluginfile_url(context_system::instance()->id,
+        $iconurl = moodle_url::make_pluginfile_url(
+            context_system::instance()->id,
             'auth_casattras',
             'logo',
             null,

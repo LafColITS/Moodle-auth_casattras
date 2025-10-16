@@ -34,12 +34,12 @@
  * @param   array $options additional options affecting the file serving
  * @return  bool false|void
  */
-function auth_casattras_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options=[]) {
+function auth_casattras_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = []) {
     if ($context->contextlevel != CONTEXT_SYSTEM) {
         return false;
     }
 
-    if ($filearea !== 'logo' ) {
+    if ($filearea !== 'logo') {
         return false;
     }
 
