@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.0.2 (July 15, 2026)
+
+- Add composer support
+
 ## 5.0.1 (July 22, 2025)
 
 - Ship phpCAS 1.6.1 locally

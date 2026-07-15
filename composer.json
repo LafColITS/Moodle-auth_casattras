@@ -1,0 +1,12 @@
+{
+    "name": "lafayettecollege/moodle-auth_casattras",
+    "description": "This is an authentication plugin for Moodle that authenticates users via a Central Authentication Service (CAS) server.",
+    "type": "moodle-auth",
+    "require": {
+        "composer/installers": "*"
+    },
+    "license": "GPL-3.0-or-later",
+    "extra": {
+        "installer-name": "casattras"
+    }
+}
