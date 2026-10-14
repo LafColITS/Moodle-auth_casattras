@@ -72,7 +72,7 @@ class auth_plugin_casattras extends auth_plugin_base {
             \core\session\manager::gc(); // Remove stale sessions.
 
             $returnurl = new moodle_url('/admin/settings.php', ['section' => 'manageauths']);
-            print_error(
+            throw new \moodle_exception(
                 'casattras_disabled_by_cas',
                 'auth_casattras',
                 $returnurl,
