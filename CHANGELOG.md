@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.0.3 (October 14, 2026)
+
+- Support bulk upload scenarios (thanks @fishfree)
+- Do not attempt to initialize phpCAS from the CLI (thanks @levinch)
+- Code cleanup
+
 ## 5.0.2 (July 15, 2026)
 
 - Add composer support
