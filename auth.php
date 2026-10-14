@@ -83,6 +83,16 @@ class auth_plugin_casattras extends auth_plugin_base {
     }
 
     /**
+     * Returns true if this authentication plugin can be manually set
+     * for users, for example when bulk uploading users.
+     *
+     * @return bool
+     */
+    public function can_be_manually_set() {
+        return true;
+    }
+
+    /**
      * Return the properly translated human-friendly title of this auth plugin
      */
     public function get_title() {
