@@ -286,6 +286,10 @@ class auth_plugin_casattras extends auth_plugin_base {
      * @return mixed array with no magic quotes or false on error
      */
     public function get_userinfo($username) {
+        if (defined('CLI_SCRIPT') && CLI_SCRIPT) {
+            return false; // Bypass phpCAS checks in CLI mode.
+        }
+
         if (!phpCAS::isAuthenticated() || trim(core_text::strtolower(phpCAS::getUser())) != $username) {
             return [];
         }
